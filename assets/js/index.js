@@ -92,12 +92,77 @@ function findRecipeID(recipeID){
             ingredient: response.meals[0].strIngredient20,
             measure: response.meals[0].strMeasure20
         }]
+        
+        somethingOrOther(ingredients);
     });
 }
+    
+// NEW STUFF
 
+let nutritionAmounts = {
+    FATS: 0,
+    CARBS: 0,
+    SUGARS: 0,
+    PROTIEN: 0
+};
+
+let somethingOrOther = (arr) => {
+    arr.forEach(obj => {
+        if (obj.ingredient || obj.measure) {
+            let searchIngredient = obj.ingredient.replace(/ /g, '%20');
+            let searchMeasure = obj.measure.replace(/ /g, '%20');
+            tempName(searchMeasure + '%20' + searchIngredient);
+        }
+        // RENAME 'something'
+    });
+    setDOM();
+}
+
+// function to make the call
+let tempName = (foodData) => {
+    // which ingrediant to search for
+    // let ingrediant = 
+    // url stuffs
+    let apiInfo = {
+        key: 'ff2e56199c3ca1c897bcdae2d4f3d7a9',
+        ID: '126bfcd4'
+    };
+
+    $.ajax({
+        url: 'https://api.edamam.com/api/nutrition-data?app_id=' + apiInfo.ID + '&app_key=' + apiInfo.key +
+            '&ingr=' + foodData,
+        type: 'GET'
+    })
+        .fail(err => { console.log(err); })
+        .done(res => {
+            // if succeed
+            // or 0, some calls don't return all nutrients
+            let fats = res.totalNutrients.FAT === undefined ? 0 : res.totalNutrients.FAT.quantity;
+            let carbs = res.totalNutrients.CHOCDF === undefined ? 0 : res.totalNutrients.CHOCDF.quantity;
+            let sugar = res.totalNutrients.SUGAR === undefined ? 0 : res.totalNutrients.SUGAR.quantity;
+            let protien = res.totalNutrients.PROCNT === undefined ? 0 : res.totalNutrients.PROCNT.quantity;
+
+            // // add the nutrients to object for each ingredient
+            nutritionAmounts.FATS += fats;
+            nutritionAmounts.CARBS += carbs;
+            nutritionAmounts.SUGARS += sugar;
+            nutritionAmounts.PROTIEN += protien;
+
+        });
+};
+
+let setDOM = () => {
+    // set stuff in object to html here
+    console.log(nutritionAmounts);
+};
+
+findRecipeID("52772");
+
+// fat carbs/sugar protien
+   
 // Random recipe search function 
-function findRecipeID(recipeID){
-    let queryURL = "https://www.themealdb.com/api/json/v1/1/randomselection.php"+ recipeID;
+function findRandomRecipe(){
+    let queryURL = "https://www.themealdb.com/api/json/v1/1/randomselection.php";
 
     $.ajax({
         url: queryURL, 
