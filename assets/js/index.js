@@ -95,4 +95,18 @@ function findRecipeID(recipeID){
     });
 }
 
+function saveRecipe(recipeID){
+    let savedRecipes = [];
+    if (localStorage.getItem("savedRecipes") !== null){
+        savedRecipes = savedRecipes.concat(JSON.parse(localStorage.getItem("savedRecipes")));
+        console.log(savedRecipes);
+        savedRecipes = savedRecipes.concat(recipeID);
+        localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+    }
+    else{
+        savedRecipes = [recipeID];
+        localStorage.setItem("savedRecipes", savedRecipes);
+    }
+}
+
 findRecipeID("52772");
