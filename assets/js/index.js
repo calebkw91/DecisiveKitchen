@@ -96,8 +96,8 @@ function findRecipeID(recipeID){
 }
 
 // Random recipe search function 
-function findRecipeID(recipeID){
-    let queryURL = "https://www.themealdb.com/api/json/v1/1/randomselection.php"+ recipeID;
+function findRandomRecipe(){
+    let queryURL = "https://www.themealdb.com/api/json/v1/1/randomselection.php";
 
     $.ajax({
         url: queryURL, 
