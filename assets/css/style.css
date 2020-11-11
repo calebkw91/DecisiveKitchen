@@ -26,14 +26,27 @@
     margin-top: 40px;
 }
 
+.first-column {
+    margin: 20px 0px 0px 25px;
+}
+
+.second-column {
+    margin-top: 20px;
+}
+
 .input {
-    width: 300px;
+    width: 100%;
     height: 50px;
     margin: 20px 0px 0px 25px;
 }
 
 .is-large {
     margin: 20px 0px 0px 25px;
+}
+
+.subtitle-2 {
+    color: black;
+    margin: 20px 0px 0px 0px;
 }
 
 .button {
