@@ -1,3 +1,7 @@
+.hide {
+    display: none;
+}
+
 .hero-body {
     background-image: url("../images/kitchen.jpg");
     height: 50%;
