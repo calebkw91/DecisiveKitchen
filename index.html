@@ -5,60 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <title>Cocktail Shaker</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Decisive Kitchen</title>
 </head>
 <body>
 
-    <section class="hero is-primary is-medium">
+    <section class="hero is-medium">
         <div class="hero-body">
           <div class="container">
             <h1 class="title">
-              Cocktail Shaker
+              Decisive Kitchen
             </h1>
             <h3 class="subtitle">
-              The place where you make your cocktails.
+              The place where you decide what to cook.
             </h3>
           </div>
         </div>
-      </section>
+    </section>
 
-    <nav class="navbar" role="navigation" aria-label="main navigation">
+    <nav class="navbar">
+      <div class="container">
         <div class="navbar-brand">
-          
-      
-          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
+          <a class="navbar-item" style="font-weight:bold;font-size: x-large;">Decisive Kitchen</a>
+          <span class="navbar-burger burger" data-target="navMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
         </div>
-      
-        <div id="navbarBasicExample" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item">
-              Home
-            </a>
-      
-            <a class="navbar-item">
-              Saved Recipes
-            </a>
-       
+        <div id="navMenu" class="navbar-menu">
+          <div class="navbar-end">
+            <a href="#" class="navbar-item is-active">Home</a>
+            <a href="savedRecipies.html" class="navbar-item">Saved Recipes</a>
+          </div>
+
         </div>
-      </nav>
-    
-      <textarea class="textarea" placeholder="e.g. Hello world"></textarea>
-      <div class="select is-large">
-        <select>
-          <option>Search by...</option>
-          <option>Ingredients</option>
-          <option>Cocktail Name</option>
-          <option>Non-Alcoholic</option>
-          <option>Random</option>
-        </select>
       </div>
+    </nav> 
 
-      <div id="placeholder"></div>
 
+    <input class="input" type="text" placeholder="e.g., tomatoes">
+    <br>
+    <div class="select is-large">
+      <select>
+        <option>Search by...</option>
+        <option>Ingredients</option>
+        <option>Meal</option>
+      </select>
+    </div>
+    <br>
+    <button class="button">Search</button>
+
+    <div id="placeholder"></div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/js/index.js"></script>
+
+    <script type="text/javascript">
+      (function() {
+        let burger = document.querySelector('.burger');
+        let nav = document.querySelector('#'+burger.dataset.target);
+  
+        burger.addEventListener('click', function(){
+          burger.classList.toggle('is-active');
+          nav.classList.toggle('is-active');
+        });
+      })();
+    </script>
 
 </body>
 </html>

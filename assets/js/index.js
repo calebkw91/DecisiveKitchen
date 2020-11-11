@@ -1,3 +1,20 @@
+// import $ from 'jquery';
+
+function findRecipeMain(mainIng){
+    let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast" + mainIng;
+
+    $.ajax({
+        url: queryURL, 
+        method: "GET"
+    })
+    .then(function(response) {
+        for (let i=0; i<response.meals.length; i++){
+            //Create html elements to a list on the page, when a link is clicked use findRecipeID function to
+            //pull up recipe details
+        }
+    });
+}
+
 function findRecipeID(recipeID){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + recipeID;
 
@@ -6,7 +23,7 @@ function findRecipeID(recipeID){
         method: "GET"
     })
     .then(function(response) {
-        // console.log(response);
+        console.log(response);
 
         let recipeName = response.meals[0].strMeal;
         let recipeInstructions = response.meals[0].strInstructions;
@@ -142,3 +159,19 @@ let setDOM = () => {
 findRecipeID("52772");
 
 // fat carbs/sugar protien
+   
+function saveRecipe(recipeID){
+    let savedRecipes = [];
+    if (localStorage.getItem("savedRecipes") !== null){
+        savedRecipes = savedRecipes.concat(JSON.parse(localStorage.getItem("savedRecipes")));
+        console.log(savedRecipes);
+        savedRecipes = savedRecipes.concat(recipeID);
+        localStorage.setItem("savedRecipes", JSON.stringify(savedRecipes));
+    }
+    else{
+        savedRecipes = [recipeID];
+        localStorage.setItem("savedRecipes", savedRecipes);
+    }
+}
+
+findRecipeID("52772");
