@@ -4,8 +4,8 @@
 
 
 // Function to show or hide recipie
-function showRecipie () {
-    $(".recipieName").on("click", function() {
+function showRecipie() {
+    $(".recipieName").on("click", function () {
         let state = $(this).attr("data-state");
 
         if (state === "hide") {
