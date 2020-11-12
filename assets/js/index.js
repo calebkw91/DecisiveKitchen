@@ -161,8 +161,8 @@ findRecipeID("52772");
 // fat carbs/sugar protien
    
 // Random recipe search function 
-function findRandomRecipe(){
-    let queryURL = "https://www.themealdb.com/api/json/v1/1/randomselection.php";
+function filterByArea(){
+    let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?a=Canadian";
 
     $.ajax({
         url: queryURL, 
