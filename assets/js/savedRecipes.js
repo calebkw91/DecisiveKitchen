@@ -98,9 +98,13 @@ function recipeToDOM(response, i){
 
     let savedDiv = $("#saved-recipes");
 
+    let titleCol = $("<div>").addClass("columns recipe-title");
+    titleCol.attr("target", i);
+    let headerELCol = $("<div>").addClass("column is-half");
+    let buttonCol = $("<div>").addClass("column is-half");
+
     let headerEL = $("<h3>").addClass("recipeName");
     headerEL.text(response.strMeal);
-    headerEL.attr("target", i);
 
     let divHide = $("<div>").addClass("recipe hide");
     divHide.attr("data-state", "hide");
@@ -147,11 +151,16 @@ function recipeToDOM(response, i){
 
     divHide.append(divCol);
 
-    savedDiv.append(headerEL);
+    headerELCol.append(headerEL);
+
+    titleCol.append(headerELCol);
+    titleCol.append(buttonCol);
+
+    savedDiv.append(titleCol);
     savedDiv.append(divHide);
 }
 
-$(document).on("click", ".recipeName",  function () {
+$(document).on("click", ".recipe-title",  function () {
     console.log("here");
     let state = $(this).attr("data-state");
 

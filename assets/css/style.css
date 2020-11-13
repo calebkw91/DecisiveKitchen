@@ -111,19 +111,3 @@
     list-style: none;
 }
 
-/* SAVED RECIPES */
-.navbar-logo-2 {
-    margin-top: 5px;
-    margin-left: 30px;
-}
-
-#saved-recipes {
-    font-family: 'Josefin Sans', sans-serif;
-    font-size: 20px;
-    margin-left: 25px;
-}
-
-.recipeName {
-    margin-top: 25px;
-    margin-left: 25px;
-}
