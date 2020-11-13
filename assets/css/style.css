@@ -39,7 +39,7 @@
 }
 
 .first-column {
-    margin: 20px 0px 0px 45px;
+    margin: 20px 0px 0px 25px;
     font-size: 30px;
     font-family: 'Josefin Sans', sans-serif;
     color: black;
@@ -54,30 +54,60 @@
 }
 
 .second-column {
+    margin: 20px 0px 0px 25px;
     font-size: 30px;
     font-family: 'Josefin Sans', sans-serif;
     color: black;
 }
 
 .input {
-    width: 75%;
+    width: 50%;
     height: 50px;
-    margin: 20px 0px 0px 45px;
+    margin: 20px 0px 0px 25px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
 .is-rounded {
-    margin: 20px 0px 0px 45px;
+    margin: 20px 0px 25px 25px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
-.ingredients, .instructions, .nutrition, .video {
+#search {
+    margin: 10px 0px 25px 25px;
+}
+
+.ingredients, .instructions {
+    margin-left: 25px;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 20px;
     text-decoration: underline;
 }
 
-#list-item {
+#ingredients, #instructions {
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 5px 5px 5px 0px;
+    margin-left: 25px;
+}
+
+.nutrition, .video {
+    margin-left: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+#recipe-name {
+    margin-left: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+}
+
+#recipe-img {
+    margin-left: 25px;
+}
+
+.nutrient-list {
+    margin-left: 25px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
