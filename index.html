@@ -4,29 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Bulma CSS stylesheet linked -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Font Awesome linked -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <!-- Google Fonts linked -->
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+    <!-- External stylesheet linked -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
     <title>Decisive Kitchen</title>
 </head>
+
 <body>
 
     <section class="hero is-medium">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">
-              Decisive Kitchen
-            </h1>
-            <h3 class="subtitle">
-              The place where you decide what to cook.
-            </h3>
-          </div>
-        </div>
+        <div class="hero-body"></div>
     </section>
 
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" style="font-weight:bold;font-size: x-large;">Decisive Kitchen</a>
+          <a class="navbar-logo" href="index.html"><img src="assets/images/chop-dk.png" width="200"></a>
           <span class="navbar-burger burger" data-target="navMenu">
             <span></span>
             <span></span>
@@ -35,36 +34,19 @@
         </div>
         <div id="navMenu" class="navbar-menu">
           <div class="navbar-end">
-            <a href="#" class="navbar-item is-active">Home</a>
-            <a href="savedRecipes.html" class="navbar-item">Saved Recipes</a>
+            <a href="index.html" class="navbar-item is-active"><img src="assets/images/home.png"></a>
+            <a href="savedRecipes.html" class="navbar-item"><img src="assets/images/saved-recipes.png"></a>
           </div>
-
         </div>
       </div>
     </nav>
 
-    <!-- <div class="columns is-vcentered">
-      <div class="column is-8">
-        <p class="first-column">Find a Recipe</p>
-        <input class="input" type="text" placeholder="e.g., tomatoes">
-        <br>
-        <div class="select is-large">
-          <select>
-            <option>Search by...</option>
-            <option>Ingredients</option>
-            <option>Meal</option>
-            <option>Random</option>
-          </select>
-        </div>
-        <br>
-        <button class="button">Search</button>
-      </div> -->
     <div class="columns">
       <div class="column is-4">
-        <p class="first-column">Find a Recipe</p>
-        <input class="input" id="search-value" type="text" placeholder="e.g., tomatoes">
-        <br>
-        <div class="select is-large">
+        <header class="first-column"><i class="fas fa-utensils"></i>Find a Recipe</header>
+        <input class="input" id="search-value" type="text" placeholder="e.g., chicken breast">
+        <br />
+        <div class="select is-medium is-rounded dropdown">
           <select id="search-select">
             <option>Search by...</option>
             <option value="ingredients">Ingredients</option>
@@ -72,31 +54,31 @@
             <option value="random">Random</option>
           </select>
         </div>
-        <br>
-        <button class="button" id="search">Search</button>
+        <br />
+        <button class="button is-rounded" id="search">Search</button>
       </div>
-      <div class="column is-1"></div>
-      <div class="column is-7">
-        <p class="second-column">Start Cooking!</p>
+      <div class="column is-2"></div>
+      <div class="column is-6">
+        <header class="second-column"><i class="fas fa-carrot"></i>Start Cooking!</header>
         <br>
         <div id="recipe">
           <h3 id="recipe-name"></h3>
-          <img id="recipe-img" src="assets/images/meal.jpg" alt="Placeholder Meal Image">
+          <img id="recipe-img" src="assets/images/meal.jpg" alt="Placeholder Meal Image" width="450"><br><br>
           <p class="ingredients">Ingredients:</p>
-          <ul id="ingredients"></ul>
+          <ol id="ingredients" type="i"></ul>
           <br>
           <p class="instructions">Cooking Process:</p>
           <p id="instructions"></p>
         </div>
         <br>
         <p class="nutrition">Nutritional Information:</p>
-        <ul>
-          <li>Fat:</li>
-          <li>Carbohydrates:</li>
-          <li>Protein:</li>
-          <li>Sugar:</li>
-        </ul>
-        <br>
+        <ol type="i">
+          <li id="list-item">Fat:</li>
+          <li id="list-item">Carbohydrates:</li>
+          <li id="list-item">Protein:</li>
+          <li id="list-item">Sugar:</li>
+        </ol>
+        <br />
         <p class="video">Video:</p>
         <video width="320" height="240" controls>
           <source src="#" id="recipe-video" type="video">
