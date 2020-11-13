@@ -101,7 +101,7 @@ let setDOM = () => {
 // fat carbs/sugar protien
    
 // Random recipe search function 
-function filterByArea(area){
+function findRecipeArea(area){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area;
 
     $.ajax({
@@ -109,9 +109,8 @@ function filterByArea(area){
         method: "GET"
     })
     .then(function(response) {
-        console.log(response);
-
-        recipeToDOM(response.meals[0]);
+        let random = Math.floor(Math.random() * response.meals.length);
+        findRecipeID(response.meals[random].idMeal);
     });
 }
 
@@ -234,7 +233,7 @@ $("#search").on("click", function(){
     
     if(selectedOption == "area")
     {
-        filterByArea();
+        findRecipeArea(searchValue);
     }
 
 })
