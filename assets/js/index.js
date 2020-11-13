@@ -1,17 +1,16 @@
 // import $ from 'jquery';
 
 function findRecipeMain(mainIng){
-    let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast" + mainIng;
+    let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIng;
 
     $.ajax({
         url: queryURL, 
         method: "GET"
     })
     .then(function(response) {
-        for (let i=0; i<response.meals.length; i++){
-            //Create html elements to a list on the page, when a link is clicked use findRecipeID function to
-            //pull up recipe details
-        }
+
+        let random = Math.floor(Math.random() * response.meals.length);
+        findRecipeID(response.meals[random].idMeal);
     });
 }
 
@@ -23,77 +22,7 @@ function findRecipeID(recipeID){
         method: "GET"
     })
     .then(function(response) {
-        console.log(response);
-
-        let recipeName = response.meals[0].strMeal;
-        let recipeInstructions = response.meals[0].strInstructions;
-        let recipeImage = response.meals[0].strMealThumb;
-        let recipeVideo = response.meals[0].strYoutube;
-
-        let ingredients = 
-        [{
-            ingredient: response.meals[0].strIngredient1,
-            measure: response.meals[0].strMeasure1
-        },{
-            ingredient: response.meals[0].strIngredient2,
-            measure: response.meals[0].strMeasure2
-        },{
-            ingredient: response.meals[0].strIngredient3,
-            measure: response.meals[0].strMeasure3
-        },{
-            ingredient: response.meals[0].strIngredient4,
-            measure: response.meals[0].strMeasure4
-        },{
-            ingredient: response.meals[0].strIngredient5,
-            measure: response.meals[0].strMeasure5
-        },{
-            ingredient: response.meals[0].strIngredient6,
-            measure: response.meals[0].strMeasure6
-        },{
-            ingredient: response.meals[0].strIngredient7,
-            measure: response.meals[0].strMeasure7
-        },{
-            ingredient: response.meals[0].strIngredient8,
-            measure: response.meals[0].strMeasure8
-        },{
-            ingredient: response.meals[0].strIngredient9,
-            measure: response.meals[0].strMeasure9
-        },{
-            ingredient: response.meals[0].strIngredient10,
-            measure: response.meals[0].strMeasure10
-        },{
-            ingredient: response.meals[0].strIngredient11,
-            measure: response.meals[0].strMeasure11
-        },{
-            ingredient: response.meals[0].strIngredient12,
-            measure: response.meals[0].strMeasure12
-        },{
-            ingredient: response.meals[0].strIngredient13,
-            measure: response.meals[0].strMeasure13
-        },{
-            ingredient: response.meals[0].strIngredient14,
-            measure: response.meals[0].strMeasure14
-        },{
-            ingredient: response.meals[0].strIngredient15,
-            measure: response.meals[0].strMeasure15
-        },{
-            ingredient: response.meals[0].strIngredient16,
-            measure: response.meals[0].strMeasure16
-        },{
-            ingredient: response.meals[0].strIngredient17,
-            measure: response.meals[0].strMeasure17
-        },{
-            ingredient: response.meals[0].strIngredient18,
-            measure: response.meals[0].strMeasure18
-        },{
-            ingredient: response.meals[0].strIngredient19,
-            measure: response.meals[0].strMeasure19
-        },{
-            ingredient: response.meals[0].strIngredient20,
-            measure: response.meals[0].strMeasure20
-        }]
-        
-        somethingOrOther(ingredients);
+        recipeToDOM(response.meals[0]);
     });
 }
     
@@ -172,8 +101,8 @@ let setDOM = () => {
 // fat carbs/sugar protien
    
 // Random recipe search function 
-function findRandomRecipe(){
-    let queryURL = "https://www.themealdb.com/api/json/v1/1/randomselection.php";
+function filterByArea(area){
+    let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area;
 
     $.ajax({
         url: queryURL, 
@@ -182,72 +111,7 @@ function findRandomRecipe(){
     .then(function(response) {
         console.log(response);
 
-        let recipeName = response.meals[0].strMeal;
-        let recipeInstructions = response.meals[0].strInstructions;
-        let recipeImage = response.meals[0].strMealThumb;
-        let recipeVideo = response.meals[0].strYoutube;
-        let ingredients = 
-        [{
-            ingredient: response.meals[0].strIngredient1,
-            measure: response.meals[0].strMeasure1
-        },{
-            ingredient: response.meals[0].strIngredient2,
-            measure: response.meals[0].strMeasure2
-        },{
-            ingredient: response.meals[0].strIngredient3,
-            measure: response.meals[0].strMeasure3
-        },{
-            ingredient: response.meals[0].strIngredient4,
-            measure: response.meals[0].strMeasure4
-        },{
-            ingredient: response.meals[0].strIngredient5,
-            measure: response.meals[0].strMeasure5
-        },{
-            ingredient: response.meals[0].strIngredient6,
-            measure: response.meals[0].strMeasure6
-        },{
-            ingredient: response.meals[0].strIngredient7,
-            measure: response.meals[0].strMeasure7
-        },{
-            ingredient: response.meals[0].strIngredient8,
-            measure: response.meals[0].strMeasure8
-        },{
-            ingredient: response.meals[0].strIngredient9,
-            measure: response.meals[0].strMeasure9
-        },{
-            ingredient: response.meals[0].strIngredient10,
-            measure: response.meals[0].strMeasure10
-        },{
-            ingredient: response.meals[0].strIngredient11,
-            measure: response.meals[0].strMeasure11
-        },{
-            ingredient: response.meals[0].strIngredient12,
-            measure: response.meals[0].strMeasure12
-        },{
-            ingredient: response.meals[0].strIngredient13,
-            measure: response.meals[0].strMeasure13
-        },{
-            ingredient: response.meals[0].strIngredient14,
-            measure: response.meals[0].strMeasure14
-        },{
-            ingredient: response.meals[0].strIngredient15,
-            measure: response.meals[0].strMeasure15
-        },{
-            ingredient: response.meals[0].strIngredient16,
-            measure: response.meals[0].strMeasure16
-        },{
-            ingredient: response.meals[0].strIngredient17,
-            measure: response.meals[0].strMeasure17
-        },{
-            ingredient: response.meals[0].strIngredient18,
-            measure: response.meals[0].strMeasure18
-        },{
-            ingredient: response.meals[0].strIngredient19,
-            measure: response.meals[0].strMeasure19
-        },{
-            ingredient: response.meals[0].strIngredient20,
-            measure: response.meals[0].strMeasure20
-        }]
+        recipeToDOM(response.meals[0]);
     });
 }
 
@@ -266,4 +130,103 @@ function saveRecipe(recipeID){
     }
 }
 
-findRecipeID("52772");
+function recipeToDOM(response){
+    console.log(response);
+    $("#recipe-name").text(response.strMeal);
+    $("#instructions").text(response.strInstructions);
+    $("#recipe-img").attr("src", response.strMealThumb);
+    $("#recipe-video").attr("src", response.strYoutube);
+
+    let ingredients = 
+    [{
+        ingredient: response.strIngredient1,
+        measure: response.strMeasure1
+    },{
+        ingredient: response.strIngredient2,
+        measure: response.strMeasure2
+    },{
+        ingredient: response.strIngredient3,
+        measure: response.strMeasure3
+    },{
+        ingredient: response.strIngredient4,
+        measure: response.strMeasure4
+    },{
+        ingredient: response.strIngredient5,
+        measure: response.strMeasure5
+    },{
+        ingredient: response.strIngredient6,
+        measure: response.strMeasure6
+    },{
+        ingredient: response.strIngredient7,
+        measure: response.strMeasure7
+    },{
+        ingredient: response.strIngredient8,
+        measure: response.strMeasure8
+    },{
+        ingredient: response.strIngredient9,
+        measure: response.strMeasure9
+    },{
+        ingredient: response.strIngredient10,
+        measure: response.strMeasure10
+    },{
+        ingredient: response.strIngredient11,
+        measure: response.strMeasure11
+    },{
+        ingredient: response.strIngredient12,
+        measure: response.strMeasure12
+    },{
+        ingredient: response.strIngredient13,
+        measure: response.strMeasure13
+    },{
+        ingredient: response.strIngredient14,
+        measure: response.strMeasure14
+    },{
+        ingredient: response.strIngredient15,
+        measure: response.strMeasure15
+    },{
+        ingredient: response.strIngredient16,
+        measure: response.strMeasure16
+    },{
+        ingredient: response.strIngredient17,
+        measure: response.strMeasure17
+    },{
+        ingredient: response.strIngredient18,
+        measure: response.strMeasure18
+    },{
+        ingredient: response.strIngredient19,
+        measure: response.strMeasure19
+    },{
+        ingredient: response.strIngredient20,
+        measure: response.strMeasure20
+    }]
+
+    for(let i=0; i<ingredients.length; i++){
+        if(ingredients[i].ingredient)
+        {
+            let liEL = $("<li>").text(ingredients[i].measure + " : " + ingredients[i].ingredient);
+            $("#ingredients").append(liEL);
+        }
+    }
+
+    somethingOrOther(ingredients);
+}
+
+$("#search").on("click", function(){
+    let searchValue = $("#search-value").val();
+    var selectedOption = $('#search-select option:selected').attr("value");
+
+    console.log(selectedOption);
+    console.log(searchValue);
+
+    if(selectedOption == "ingredients")
+    {
+        findRecipeMain(searchValue);
+    }
+    
+    if(selectedOption == "random")
+    {
+        findRandomRecipe();
+    }
+
+})
+
