@@ -98,24 +98,29 @@ function findRecipeID(recipeID){
 }
     
 // NEW STUFF
-
+let index = 0;
 let nutritionAmounts = {
+    KCALS: 0,
     FATS: 0,
     CARBS: 0,
     SUGARS: 0,
     PROTIEN: 0
 };
 
-let somethingOrOther = (arr) => {
+// FIXX THIS SHIT
+function somethingOrOther(arr) {
+    
     arr.forEach(obj => {
+        // will ALWAYS have 20 ingredients, although not all will be used
         if (obj.ingredient || obj.measure) {
             let searchIngredient = obj.ingredient.replace(/ /g, '%20');
             let searchMeasure = obj.measure.replace(/ /g, '%20');
-            tempName(searchMeasure + '%20' + searchIngredient);
+            tempName(searchMeasure + "%20" + searchIngredient);
         }
-        // RENAME 'something'
-    });
-    setDOM();
+        // after loop through all ingreds
+    })
+    setTimeout(() => { setDOM() }, 3000);
+    
 }
 
 // function to make the call
@@ -124,29 +129,32 @@ let tempName = (foodData) => {
     // let ingrediant = 
     // url stuffs
     let apiInfo = {
-        key: 'ff2e56199c3ca1c897bcdae2d4f3d7a9',
-        ID: '126bfcd4'
+        key: '81b52059bcf4c6e482c3dbf3dca19439',
+        ID: 'd1b6a218'
     };
-
+    let url = 'https://api.edamam.com/api/nutrition-data?app_id=' + apiInfo.ID + '&app_key=' + apiInfo.key +
+            '&ingr=' + foodData
     $.ajax({
-        url: 'https://api.edamam.com/api/nutrition-data?app_id=' + apiInfo.ID + '&app_key=' + apiInfo.key +
-            '&ingr=' + foodData,
-        type: 'GET'
+        url: url,
+        type: 'GET',
+        headers: {  'Access-Control-Allow-Origin': url }
     })
         .fail(err => { console.log(err); })
         .done(res => {
             // if succeed
             // or 0, some calls don't return all nutrients
+            let totalKcals = res.totalNutrients.ENERC_KCAL === undefined ? 0 : res.totalNutrients.ENERC_KCAL.quantity;
             let fats = res.totalNutrients.FAT === undefined ? 0 : res.totalNutrients.FAT.quantity;
             let carbs = res.totalNutrients.CHOCDF === undefined ? 0 : res.totalNutrients.CHOCDF.quantity;
             let sugar = res.totalNutrients.SUGAR === undefined ? 0 : res.totalNutrients.SUGAR.quantity;
             let protien = res.totalNutrients.PROCNT === undefined ? 0 : res.totalNutrients.PROCNT.quantity;
 
             // // add the nutrients to object for each ingredient
-            nutritionAmounts.FATS += fats;
-            nutritionAmounts.CARBS += carbs;
-            nutritionAmounts.SUGARS += sugar;
-            nutritionAmounts.PROTIEN += protien;
+            nutritionAmounts.KCALS += Math.round(totalKcals);
+            nutritionAmounts.FATS += Math.round(fats);
+            nutritionAmounts.CARBS += Math.round(carbs);
+            nutritionAmounts.SUGARS += Math.round(sugar);
+            nutritionAmounts.PROTIEN += Math.round(protien);
 
         });
 };
@@ -154,9 +162,12 @@ let tempName = (foodData) => {
 let setDOM = () => {
     // set stuff in object to html here
     console.log(nutritionAmounts);
+    $('#calories-display').text("Calories: " + nutritionAmounts.KCALS);
+    $('#fat-display').text("Fat: " + nutritionAmounts.FATS + 'g');
+    $('#carb-display').text("Carbs: " + nutritionAmounts.CARBS + 'g');
+    $('#protien-display').text("Protien: " + nutritionAmounts.PROTIEN + 'g');
+    $('#sugar-display').text("Sugar: " + nutritionAmounts.SUGARS + 'g');
 };
-
-findRecipeID("52772");
 
 // fat carbs/sugar protien
    
