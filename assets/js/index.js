@@ -133,6 +133,7 @@ function saveRecipe(recipeID){
 function recipeToDOM(response){
     console.log(response);
     $("#recipe-name").text(response.strMeal);
+    $("#recipe-name").attr("data-id", response.idMeal);
     $("#instructions").text(response.strInstructions);
     $("#recipe-img").attr("src", response.strMealThumb);
     $("#recipe-video").attr("src", response.strYoutube);
@@ -208,7 +209,7 @@ function recipeToDOM(response){
         }
     }
 
-    somethingOrOther(ingredients);
+    //somethingOrOther(ingredients);
 }
 
 $("#search").on("click", function(){
@@ -228,5 +229,11 @@ $("#search").on("click", function(){
         filterByArea();
     }
 
+})
+
+$("#save").on("click", function(){
+    let id = parseInt($("#recipe-name").attr("data-id"));
+    console.log(id);
+    saveRecipe(id);
 })
 
