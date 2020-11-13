@@ -129,13 +129,21 @@ function saveRecipe(recipeID){
     }
 }
 
+function createYouTubeEmbedLink (link) {
+    return link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+}
+
 function recipeToDOM(response){
-    console.log(response);
     $("#recipe-name").text(response.strMeal);
     $("#recipe-name").attr("data-id", response.idMeal);
     $("#instructions").text(response.strInstructions);
     $("#recipe-img").attr("src", response.strMealThumb);
-    $("#recipe-video").attr("src", response.strYoutube);
+
+    let youtubeLink = createYouTubeEmbedLink(response.strYoutube);
+
+    console.log(youtubeLink);
+
+    $("#recipe-video").attr("src", youtubeLink);
 
     let ingredients = 
     [{
