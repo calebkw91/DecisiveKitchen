@@ -62,39 +62,32 @@
     <div class="columns">
       <div class="column is-4">
         <p class="first-column">Find a Recipe</p>
-        <input class="input" type="text" placeholder="e.g., tomatoes">
+        <input class="input" id="search-value" type="text" placeholder="e.g., tomatoes">
         <br>
         <div class="select is-large">
-          <select>
+          <select id="search-select">
             <option>Search by...</option>
-            <option>Ingredients</option>
-            <option>Meal</option>
-            <option>Area</option>
+            <option value="ingredients">Ingredients</option>
+            <option value="meal">Meal</option>
+            <option value="random">Random</option>
           </select>
         </div>
         <br>
-        <button class="button">Search</button>
+        <button class="button" id="search">Search</button>
       </div>
       <div class="column is-1"></div>
       <div class="column is-7">
         <p class="second-column">Start Cooking!</p>
         <br>
-        <img src="assets/images/meal.jpg" alt="Placeholder Meal Image">
-        <p class="ingredients">Ingredients:</p>
-        <ul>
-          <li>Ingredient 1</li>
-          <li>Ingredient 2</li>
-          <li>Ingredient 3</li>
-        </ul>
-        <br>
-        <p class="instructions">Cooking Process:</p>
-        <ul>
-          <li>Step 1</li>
-          <li>Step 2</li>
-          <li>Step 3</li>
-          <li>Step 4</li>
-          <li>Step 5</li>
-        </ul>
+        <div id="recipe">
+          <h3 id="recipe-name"></h3>
+          <img id="recipe-img" src="assets/images/meal.jpg" alt="Placeholder Meal Image">
+          <p class="ingredients">Ingredients:</p>
+          <ul id="ingredients"></ul>
+          <br>
+          <p class="instructions">Cooking Process:</p>
+          <p id="instructions"></p>
+        </div>
         <br>
         <p class="nutrition">Nutritional Information:</p>
         <ul>
@@ -106,7 +99,7 @@
         <br>
         <p class="video">Video:</p>
         <video width="320" height="240" controls>
-          <source src="#" type="video">
+          <source src="#" id="recipe-video" type="video">
         </video>
       </div>
     </div>
