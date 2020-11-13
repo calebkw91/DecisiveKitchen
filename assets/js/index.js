@@ -1,5 +1,7 @@
 // import $ from 'jquery';
 
+hideRecipeArea();
+
 function findRecipeMain(mainIng){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIng;
 
@@ -223,8 +225,7 @@ $("#search").on("click", function(){
     let searchValue = $("#search-value").val();
     var selectedOption = $('#search-select option:selected').attr("value");
 
-    console.log(selectedOption);
-    console.log(searchValue);
+    $("#recipe-area").show();
 
     if(selectedOption == "ingredients")
     {
@@ -239,8 +240,13 @@ $("#search").on("click", function(){
 })
 
 $("#save").on("click", function(){
+    $(this).text("Saved!");
     let id = parseInt($("#recipe-name").attr("data-id"));
     console.log(id);
     saveRecipe(id);
 })
+
+function hideRecipeArea(){
+    $("#recipe-area").hide();
+}
 

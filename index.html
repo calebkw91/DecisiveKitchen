@@ -45,22 +45,25 @@
 
     <!-- Recipe search feature appears here -->
     <div class="columns">
-      <div class="column is-6">
+      <div class="column is-12">
         <header class="first-row"><i class="fas fa-utensils"></i>Find a Recipe</header>
         <input class="input" id="search-value" type="text" placeholder="e.g., chicken breast" style="display: inline-block">
         <div class="select is-medium is-rounded dropdown">
           <select id="search-select" style="display: inline-block">
             <option>Search by...</option>
             <option value="ingredients">Ingredients</option>
-            <option value="meal">Meal</option>
             <option value="area">Region</option>
           </select>
         </div>
         <br />
         <button class="button is-rounded" id="search">Search</button>
         <br />
+      </div>
+    </div>
 
         <!-- Recipe ingredients, cooking process, and save button appear here -->
+    <div class="columns" id="recipe-area">
+      <div class="column is-6">
         <header class="second-row"><i class="fas fa-carrot"></i>Start Cooking!</header>
         <br />
         <p class="ingredients">Ingredients:</p>
