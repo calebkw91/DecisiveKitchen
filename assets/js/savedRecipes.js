@@ -1,8 +1,6 @@
 // for reference
 // will get saved recepies from local storage
-// then will call them to display in savedRecipies.html
-
-//localStorage.setItem("savedRecipes", JSON.stringify([52774, 52774]));
+// then will call them to display in savedRecipes.html
 
 loadRecipes();
 
@@ -115,7 +113,7 @@ function recipeToDOM(response, i){
     let img = $("<img>").attr("src", response.strMealThumb);
 
     let divColIng = $("<div>").addClass("column is-one-quarter ingredient");
-    let ingHead = $("<h3>").text("Ingredient");
+    let ingHead = $("<h3>").text("Ingredients");
     let ingList = $("<ul>").addClass("ingredientList");
 
     for(let i=0; i<ingredients.length; i++){
