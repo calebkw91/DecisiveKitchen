@@ -223,9 +223,9 @@ $("#search").on("click", function(){
         findRecipeMain(searchValue);
     }
     
-    if(selectedOption == "random")
+    if(selectedOption == "area")
     {
-        findRandomRecipe();
+        filterByArea();
     }
 
 })
