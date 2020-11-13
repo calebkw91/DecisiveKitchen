@@ -239,6 +239,7 @@ $("#search").on("click", function(){
 })
 
 $("#save").on("click", function(){
+    $(this).text("Saved!");
     let id = parseInt($("#recipe-name").attr("data-id"));
     console.log(id);
     saveRecipe(id);
