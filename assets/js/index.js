@@ -1,6 +1,16 @@
 // import $ from 'jquery';
 
 hideRecipeArea();
+loadInitialData();
+
+function loadInitialData(){
+    let mealID = localStorage.getItem("recipeLoad");
+    if(mealID){
+        localStorage.setItem("recipeLoad", "");
+        findRecipeID(mealID);
+        $("#recipe-area").show();
+    }
+}
 
 function findRecipeMain(mainIng){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIng;

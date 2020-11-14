@@ -134,16 +134,18 @@ function recipeToDOM(response, i){
     let instructions = $("<p>").addClass("writtenDirection");
     instructions.text(response.strInstructions);
 
-    let video = $("<a>").attr("href", response.strYoutube);
+    let mainBtn = $("<button>").attr("data-id", response.idMeal);
+    mainBtn.addClass("main-page-btn");
+    mainBtn.text("Link to Full Recipe")
 
     divColIng.append(ingHead);
     divColIng.append(ingList);
 
     divColImg.append(img);
+    divColImg.append(mainBtn);
 
     instDiv.append(instHead);
     instDiv.append(instructions);
-    instDiv.append(video);
 
     divCol.append(divColImg);
     divCol.append(divColIng);
@@ -173,3 +175,9 @@ $(document).on("click", ".recipe-title",  function () {
     }
 
 });
+
+$(document).on("click", ".main-page-btn", function(){
+    let mealID = $(this).attr("data-id");
+    localStorage.setItem("recipeLoad", mealID);
+    window.location.href = "index.html";
+})
