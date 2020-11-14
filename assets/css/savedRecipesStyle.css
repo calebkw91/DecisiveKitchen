@@ -1,0 +1,61 @@
+
+.hide {
+    display: none;
+}
+
+.hero-body {
+    background-image: url("../images/dk-full-banner.png");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+#saved-recipes {
+    position: relative;
+}
+
+.navbar {
+    padding-bottom: 10px;
+    background-color: #ffebcd;
+}
+
+.navbar-logo-2 {
+    margin-top: 5px;
+    margin-left: 30px;
+}
+
+#saved-recipes {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    margin-left: 25px;
+}
+
+.recipeName {
+    margin-top: 25px;
+    margin-left: 25px;
+}
+
+.button{
+    position: relative;
+    top: 40%;
+}
+
+.recipe{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.recipe-title{
+    background-color: lightgray;
+    margin: 10px;
+    border-radius: 10px;
+}
+
+.ingredientList, .direction {
+    font-family: 'Josefin Sans', sans-serif;
+    padding: 5px 5px 5px 0px;
+    margin-left: 25px;
+    font-size: 16px;
+}

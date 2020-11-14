@@ -18,10 +18,12 @@
 
 <body>
 
+    <!-- Hero banner -->
     <section class="hero is-medium">
         <div class="hero-body"></div>
     </section>
 
+    <!-- Responsive navigation bar with links to the main page/home and saved recipes -->
     <nav class="navbar">
       <div class="container">
         <div class="navbar-brand">
@@ -41,34 +43,43 @@
       </div>
     </nav>
 
+    <!-- Recipe search feature appears here -->
     <div class="columns">
-      <div class="column is-4">
-        <header class="first-column"><i class="fas fa-utensils"></i>Find a Recipe</header>
-        <input class="input" id="search-value" type="text" placeholder="e.g., chicken breast">
-        <br />
+      <div class="column is-12">
+        <header class="first-row"><i class="fas fa-utensils"></i>Find a Recipe</header>
+        <input class="input" id="search-value" type="text" placeholder="e.g., chicken breast" style="display: inline-block">
         <div class="select is-medium is-rounded dropdown">
-          <select id="search-select">
+          <select id="search-select" style="display: inline-block">
             <option>Search by...</option>
             <option value="ingredients">Ingredients</option>
-            <option value="meal">Meal</option>
-            <option value="random">Random</option>
+            <option value="area">Region</option>
           </select>
         </div>
         <br />
         <button class="button is-rounded" id="search">Search</button>
+        <br />
       </div>
-      <div class="column is-2"></div>
+    </div>
+
+        <!-- Recipe ingredients, cooking process, and save button appear here -->
+    <div class="columns" id="recipe-area">
       <div class="column is-6">
-        <header class="second-column"><i class="fas fa-carrot"></i>Start Cooking!</header>
-        <br>
+        <header class="second-row"><i class="fas fa-carrot"></i>Start Cooking!</header>
+        <br />
+        <p class="ingredients">Ingredients:</p>
+          <ul id="ingredients"></ul>
+          <br />
+        <p class="instructions">Cooking Process:</p>
+        <p id="instructions"></p>
+        <button class="button is-rounded" id="save">Save Recipe</button>
+      </div>
+
+      <!-- Recipe image, nutritional information, and video appear here -->
+      <div class="column is-6">
+        <br />
         <div id="recipe">
           <h3 id="recipe-name"></h3>
-          <img id="recipe-img" src="assets/images/meal.jpg" alt="Placeholder Meal Image" width="450"><br><br>
-          <p class="ingredients">Ingredients:</p>
-          <ol class="ingredient-list" id="ingredients"></ol>
-          <br>
-          <p class="instructions">Cooking Process:</p>
-          <p id="instructions"></p>
+          <img id="recipe-img" src="assets/images/placeholder-meal.jpg" alt="A plated meal with a salmon filet, salad, and lime wedge." width="450"><br />
         </div>
         <br>
 
@@ -76,24 +87,25 @@
         <label for="amount-servings">Amount of people enjoying:</label>
         <input id="amount-servings" type="text" name="amount-servings">
         <button id="split">Split</button>
-        <ol class="nutrient-list">
+        <ul class="nutrient-list">
           <li id="calories-display">Calories:</li>
           <li id="fat-display">Fat:</li>
           <li id="carb-display">Carbohydrates:</li>
           <li id="protien-display">Protein:</li>
           <li id="sugar-display">Sugar:</li>
-        </ol>
+        </ul>
         <br />
         <p class="video">Video:</p>
-        <video width="320" height="240" controls>
-          <source src="#" id="recipe-video" type="video">
-        </video>
+        <iframe width="500" height="300" id="recipe-video" src="https://www.youtube.com/embed/6UnRHtwHGSE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </div>
     
+    <!-- jQuery linked -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- External JS file linked -->
     <script src="assets/js/index.js"></script>
 
+    <!-- JavaScript to toggle the navigation bar -->
     <script type="text/javascript">
       (function() {
         let burger = document.querySelector('.burger');

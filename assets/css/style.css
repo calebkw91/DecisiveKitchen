@@ -1,3 +1,4 @@
+/* STYLING ACROSS ALL HTML PAGES */
 .hide {
     display: none;
 }
@@ -17,9 +18,10 @@
 
 .navbar {
     padding-bottom: 10px;
-    background-color: blanchedalmond;
+    background-color: #ffebcd;
 }
 
+/* MAIN PAGE|HOME */
 .navbar-logo {
     margin-left: 30px;
 }
@@ -33,69 +35,79 @@
     color: black;
 }
 
-.fa-home, .fa-utensils, .fa-carrot {
+.fa-utensils, .fa-carrot {
     margin-right: 10px;
     color: black;
 }
 
-.first-column {
+.columns {
     margin: 20px 0px 0px 45px;
+}
+
+.first-row {
+    margin: 20px 0px 0px 25px;
     font-size: 30px;
     font-family: 'Josefin Sans', sans-serif;
     color: black;
 }
 
-.is-2 {
-    margin: 10px;
-}
-
-.is-6 {
-    margin: 20px 0px 0px 45px;
-}
-
-.second-column {
+.second-row {
+    margin: 20px 0px 0px 25px;
     font-size: 30px;
     font-family: 'Josefin Sans', sans-serif;
     color: black;
 }
 
 .input {
-    width: 75%;
+    width: 50%;
     height: 50px;
-    margin: 20px 0px 0px 45px;
+    margin: 20px 0px 0px 25px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
 .is-rounded {
-    margin: 20px 0px 0px 45px;
+    margin: 20px 0px 25px 25px;
     font-family: 'Josefin Sans', sans-serif;
 }
 
+#search, #save {
+    margin: 10px 0px 25px 25px;
+}
+
 .ingredients, .instructions, .nutrition, .video {
+    margin-left: 25px;
     font-family: 'Josefin Sans', sans-serif;
     font-size: 20px;
     text-decoration: underline;
 }
 
-#list-item {
+#ingredients, #instructions {
     font-family: 'Josefin Sans', sans-serif;
-}
-
-/* SAVED RECIPES */
-.navbar-logo-2 {
-    margin-top: 5px;
-    margin-left: 30px;
-}
-
-.recipeName {
-    margin-top: 25px;
+    padding: 5px 5px 5px 0px;
     margin-left: 25px;
+}
+
+#recipe-name {
+    margin-left: 25px;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+#recipe-img {
+    margin-left: 25px;
+}
+
+.nutrient-list {
+    margin-left: 25px;
+    font-family: 'Josefin Sans', sans-serif;
 }
 
 .nutrient-list {
     list-style: none;
 }
 
-.ingredient-list {
+#ingredients {
     list-style: none;
 }
+

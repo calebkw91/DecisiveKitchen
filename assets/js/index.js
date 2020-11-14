@@ -1,5 +1,7 @@
 // import $ from 'jquery';
 
+hideRecipeArea();
+
 function findRecipeMain(mainIng){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIng;
 
@@ -129,7 +131,7 @@ let splitServing = () => {
 $('#split').on('click', splitServing);
    
 // Random recipe search function 
-function filterByArea(area){
+function findRecipeArea(area){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + area;
 
     $.ajax({
@@ -137,9 +139,8 @@ function filterByArea(area){
         method: "GET"
     })
     .then(function(response) {
-        console.log(response);
-
-        recipeToDOM(response.meals[0]);
+        let random = Math.floor(Math.random() * response.meals.length);
+        findRecipeID(response.meals[random].idMeal);
     });
 }
 
@@ -158,12 +159,21 @@ function saveRecipe(recipeID){
     }
 }
 
+function createYouTubeEmbedLink (link) {
+    return link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+}
+
 function recipeToDOM(response){
-    console.log(response);
     $("#recipe-name").text(response.strMeal);
+    $("#recipe-name").attr("data-id", response.idMeal);
     $("#instructions").text(response.strInstructions);
     $("#recipe-img").attr("src", response.strMealThumb);
-    $("#recipe-video").attr("src", response.strYoutube);
+
+    let youtubeLink = createYouTubeEmbedLink(response.strYoutube);
+
+    console.log(youtubeLink);
+
+    $("#recipe-video").attr("src", youtubeLink);
 
     let ingredients = 
     [{
@@ -235,25 +245,38 @@ function recipeToDOM(response){
             $("#ingredients").append(liEL);
         }
     }
+
     // call nutrition functions
     createIngredientJSON(ingredients);
+
 }
 
 $("#search").on("click", function(){
     let searchValue = $("#search-value").val();
     var selectedOption = $('#search-select option:selected').attr("value");
 
-    console.log(selectedOption);
-    console.log(searchValue);
+    $("#recipe-area").show();
 
     if(selectedOption == "ingredients")
     {
         findRecipeMain(searchValue);
     }
     
-    if(selectedOption == "random")
+    if(selectedOption == "area")
     {
-        findRandomRecipe();
+        findRecipeArea(searchValue);
     }
 
 })
+
+$("#save").on("click", function(){
+    $(this).text("Saved!");
+    let id = parseInt($("#recipe-name").attr("data-id"));
+    console.log(id);
+    saveRecipe(id);
+})
+
+function hideRecipeArea(){
+    $("#recipe-area").hide();
+}
+
