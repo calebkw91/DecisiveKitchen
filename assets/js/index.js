@@ -59,8 +59,8 @@ function createIngredientJSON(arr) {
 // send post request to nutrition api
 let postCall = (data) => {
     let apiInfo = {
-        KEY: "2f6d022a5420572bc02047965aa4dbaf",
-        ID: "e0a59066"
+        KEY: "9731b96be1ad481a80d0c1a119dea87b",
+        ID: "ef917726"
     }
     let url = 'https://api.edamam.com/api/nutrition-details?app_id=' +
         apiInfo.ID + '&app_key=' +
