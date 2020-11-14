@@ -4,6 +4,7 @@
 
 loadRecipes();
 
+//Loads all recipes from local storage
 function loadRecipes(){
     let savedRecipes = [];
     if (localStorage.getItem("savedRecipes") !== null){
@@ -13,10 +14,12 @@ function loadRecipes(){
 
     console.log(savedRecipes);
 
+    //For each recipe in local storage, look up recipe info
     for(let i=0; i<savedRecipes.length; i++){
         findRecipeID(savedRecipes[i], i);
     }
 }
+
 
 function findRecipeID(recipeID, i){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + recipeID;
@@ -26,6 +29,7 @@ function findRecipeID(recipeID, i){
         method: "GET"
     })
     .then(function(response) {
+        //When a response is recieved, call function to print elements to page
         recipeToDOM(response.meals[0], i);
     });
 }
@@ -96,6 +100,9 @@ function recipeToDOM(response, i){
         measure: response.strMeasure20
     }]
 
+    //Create and append all elements to page, this is done for each recipe
+    //The i variable is passed down from loadRecipes() and is used to give a unique
+    //target data state to each recipe, allowing a hide and show feature
     let savedDiv = $("#saved-recipes");
 
     let titleCol = $("<div>").addClass("columns recipe-title");
@@ -162,6 +169,7 @@ function recipeToDOM(response, i){
     savedDiv.append(divHide);
 }
 
+//When a recipe title area is clicked, the recipe information will show below it
 $(document).on("click", ".recipe-title",  function () {
     console.log("here");
     let state = $(this).attr("data-state");
@@ -176,6 +184,8 @@ $(document).on("click", ".recipe-title",  function () {
 
 });
 
+//When the button is clicked to navigate to main page, store the desired recipe id into local storage
+//The main page has a function that will grab this id on load
 $(document).on("click", ".main-page-btn", function(){
     let mealID = $(this).attr("data-id");
     localStorage.setItem("recipeLoad", mealID);
