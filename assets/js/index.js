@@ -9,6 +9,7 @@ function loadInitialData(){
     if(mealID){
         //Clear recipeLoad, so the recipe is only on this page load
         localStorage.setItem("recipeLoad", "");
+        $("#save").text("Saved!");
         findRecipeID(mealID);
         $("#recipe-area").show();
     }
@@ -268,6 +269,8 @@ function recipeToDOM(response){
 $("#search").on("click", function(){
     let searchValue = $("#search-value").val();
     var selectedOption = $('#search-select option:selected').attr("value");
+
+    $("#save").text("Save Recipe");
 
     $("#recipe-area").show();
 
