@@ -37,68 +37,96 @@ let nutritionAmounts = {
 };
 
 // FIXX THIS SHIT
-function somethingOrOther(arr) {
-    
+function createIngredientJSON(arr) {
+    let ingredientList = [];
     arr.forEach(obj => {
-        // will ALWAYS have 20 ingredients, although not all will be used
-        if (obj.ingredient || obj.measure) {
-            let searchIngredient = obj.ingredient.replace(/ /g, '%20');
-            let searchMeasure = obj.measure.replace(/ /g, '%20');
-            tempName(searchMeasure + "%20" + searchIngredient);
+        // will give us a list of ingredients to use in object post
+        if (obj.ingredient && obj.measure) {
+            ingredientList.push(obj.measure + " " + obj.ingredient);
         }
-        // after loop through all ingreds
     })
-    setTimeout(() => { setDOM() }, 3000);
-    
+    // call postCall at some point
+    let ingredientObject = JSON.stringify({"title":"chicken", "ingr":ingredientList});
+
+    //ingredientObject.ingr = ingredientList;
+
+    postCall(ingredientObject);
+    //setTimeout(() => { setDOM() }, 3000);  
 }
 
-// function to make the call
-let tempName = (foodData) => {
-    // which ingrediant to search for
-    // let ingrediant = 
-    // url stuffs
+// send post request to nutrition api
+let postCall = (data) => {
     let apiInfo = {
-        key: '81b52059bcf4c6e482c3dbf3dca19439',
-        ID: 'd1b6a218'
-    };
-    let url = 'https://api.edamam.com/api/nutrition-data?app_id=' + apiInfo.ID + '&app_key=' + apiInfo.key +
-            '&ingr=' + foodData
+        KEY: "2f6d022a5420572bc02047965aa4dbaf",
+        ID: "e0a59066"
+    }
+    let url = 'https://api.edamam.com/api/nutrition-details?app_id=' +
+        apiInfo.ID + '&app_key=' +
+        apiInfo.KEY;
     $.ajax({
         url: url,
-        type: 'GET',
-        headers: {  'Access-Control-Allow-Origin': url }
+        type: 'POST',
+        contentType: "application/json",
+        data: data,
     })
-        .fail(err => { console.log(err); })
         .done(res => {
-            // if succeed
-            // or 0, some calls don't return all nutrients
-            let totalKcals = res.totalNutrients.ENERC_KCAL === undefined ? 0 : res.totalNutrients.ENERC_KCAL.quantity;
-            let fats = res.totalNutrients.FAT === undefined ? 0 : res.totalNutrients.FAT.quantity;
-            let carbs = res.totalNutrients.CHOCDF === undefined ? 0 : res.totalNutrients.CHOCDF.quantity;
-            let sugar = res.totalNutrients.SUGAR === undefined ? 0 : res.totalNutrients.SUGAR.quantity;
-            let protien = res.totalNutrients.PROCNT === undefined ? 0 : res.totalNutrients.PROCNT.quantity;
-
-            // // add the nutrients to object for each ingredient
-            nutritionAmounts.KCALS += Math.round(totalKcals);
-            nutritionAmounts.FATS += Math.round(fats);
-            nutritionAmounts.CARBS += Math.round(carbs);
-            nutritionAmounts.SUGARS += Math.round(sugar);
-            nutritionAmounts.PROTIEN += Math.round(protien);
-
+            setNutrientObj(res);
+        })
+        .fail(err => {
+            console.log(err);
+            setDOM();
         });
+} 
+
+let setNutrientObj = (obj) => {       
+    // set variables to data or if unavailable
+    let totalKcals = obj.totalNutrients.ENERC_KCAL.quantity === undefined ? 0 : obj.totalNutrients.ENERC_KCAL.quantity;
+    let fats = obj.totalNutrients.FAT.quantity === undefined ? 0 : obj.totalNutrients.FAT.quantity;
+    let carbs = obj.totalNutrients.CHOCDF.quantity === undefined ? 0 : obj.totalNutrients.CHOCDF.quantity;
+    let sugar = obj.totalNutrients.SUGAR.quantity === undefined ? 0 : obj.totalNutrients.SUGAR.quantity;
+    let protien = obj.totalNutrients.PROCNT.quantity === undefined ? 0 : obj.totalNutrients.PROCNT.quantity;
+
+    // // add the nutrients to object for each ingredient
+    nutritionAmounts.KCALS += Math.round(totalKcals);
+    nutritionAmounts.FATS += Math.round(fats);
+    nutritionAmounts.CARBS += Math.round(carbs);
+    nutritionAmounts.SUGARS += Math.round(sugar);
+    nutritionAmounts.PROTIEN += Math.round(protien);
+
+    setDOM();
+     
 };
 
 let setDOM = () => {
     // set stuff in object to html here
-    console.log(nutritionAmounts);
-    $('#calories-display').text("Calories: " + nutritionAmounts.KCALS);
-    $('#fat-display').text("Fat: " + nutritionAmounts.FATS + 'g');
-    $('#carb-display').text("Carbs: " + nutritionAmounts.CARBS + 'g');
-    $('#protien-display').text("Protien: " + nutritionAmounts.PROTIEN + 'g');
-    $('#sugar-display').text("Sugar: " + nutritionAmounts.SUGARS + 'g');
+    if (nutritionAmounts.KCALS === 0) {
+        // call failed
+        $('#calories-display').text("Calories: " + "Unavailable");
+        $('#fat-display').text("Fat: " + "Unavailable");
+        $('#carb-display').text("Carbs: " +  "Unavailable");
+        $('#protien-display').text("Protien: " + "Unavailable");
+        $('#sugar-display').text("Sugar: " + "Unavailable");
+    } else {
+        // if call succeeded
+        $('#calories-display').text("Calories: " + nutritionAmounts.KCALS);
+        $('#fat-display').text("Fat: " + nutritionAmounts.FATS + 'g');
+        $('#carb-display').text("Carbs: " + nutritionAmounts.CARBS + 'g');
+        $('#protien-display').text("Protien: " + nutritionAmounts.PROTIEN + 'g');
+        $('#sugar-display').text("Sugar: " + nutritionAmounts.SUGARS + 'g');
+    }
+} 
+
+// function to split serving when number added to input
+let splitServing = () => {
+    let amountPeople = $('#amount-servings').val();
+    for (const property in nutritionAmounts) {
+        nutritionAmounts[property] /= amountPeople;
+    }
+    setDOM();
 };
 
-// fat carbs/sugar protien
+// listen for number input to change
+$('#split').on('click', splitServing);
    
 // Random recipe search function 
 function filterByArea(area){
@@ -207,8 +235,8 @@ function recipeToDOM(response){
             $("#ingredients").append(liEL);
         }
     }
-
-    somethingOrOther(ingredients);
+    // call nutrition functions
+    createIngredientJSON(ingredients);
 }
 
 $("#search").on("click", function(){
@@ -229,4 +257,3 @@ $("#search").on("click", function(){
     }
 
 })
-
