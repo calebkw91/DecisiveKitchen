@@ -1,7 +1,20 @@
 // import $ from 'jquery';
 
 hideRecipeArea();
+loadInitialData();
 
+function loadInitialData(){
+    let mealID = localStorage.getItem("recipeLoad");
+    //Only load initial recipe if data is stored from saved recipes page
+    if(mealID){
+        //Clear recipeLoad, so the recipe is only on this page load
+        localStorage.setItem("recipeLoad", "");
+        findRecipeID(mealID);
+        $("#recipe-area").show();
+    }
+}
+
+//Searches for recipe based on main ingredient
 function findRecipeMain(mainIng){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=" + mainIng;
 
@@ -16,6 +29,7 @@ function findRecipeMain(mainIng){
     });
 }
 
+//Looks up recipe by ID
 function findRecipeID(recipeID){
     let queryURL = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" + recipeID;
 
@@ -27,8 +41,8 @@ function findRecipeID(recipeID){
         recipeToDOM(response.meals[0]);
     });
 }
-    
-// NEW STUFF
+ 
+//Creates blank object to store nutrition data
 let index = 0;
 let nutritionAmounts = {
     KCALS: 0,
@@ -38,7 +52,6 @@ let nutritionAmounts = {
     PROTIEN: 0
 };
 
-// FIXX THIS SHIT
 function createIngredientJSON(arr) {
     let ingredientList = [];
     arr.forEach(obj => {
@@ -95,8 +108,7 @@ let setNutrientObj = (obj) => {
     nutritionAmounts.SUGARS += Math.round(sugar);
     nutritionAmounts.PROTIEN += Math.round(protien);
 
-    setDOM();
-     
+    setDOM();   
 };
 
 let setDOM = () => {
@@ -144,7 +156,7 @@ function findRecipeArea(area){
     });
 }
 
-
+//When save recipe button is clicked, store recipe id into local storage
 function saveRecipe(recipeID){
     let savedRecipes = [];
     if (localStorage.getItem("savedRecipes") !== null){
@@ -159,10 +171,12 @@ function saveRecipe(recipeID){
     }
 }
 
+//API sends a watch link, changes watch link to embed link to display on page
 function createYouTubeEmbedLink (link) {
     return link.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
 }
 
+//Prints recipe info to index.html
 function recipeToDOM(response){
     $("#recipe-name").text(response.strMeal);
     $("#recipe-name").attr("data-id", response.idMeal);
@@ -248,9 +262,9 @@ function recipeToDOM(response){
 
     // call nutrition functions
     createIngredientJSON(ingredients);
-
 }
 
+//On search, grab value from input field and select option and run the desired search
 $("#search").on("click", function(){
     let searchValue = $("#search-value").val();
     var selectedOption = $('#search-select option:selected').attr("value");
@@ -269,6 +283,7 @@ $("#search").on("click", function(){
 
 })
 
+//Calls function to save recipe id in local storage
 $("#save").on("click", function(){
     $(this).text("Saved!");
     let id = parseInt($("#recipe-name").attr("data-id"));
@@ -276,6 +291,7 @@ $("#save").on("click", function(){
     saveRecipe(id);
 })
 
+//Called on page load, hides recipe area of main page until there is data to be loaded into it
 function hideRecipeArea(){
     $("#recipe-area").hide();
 }
