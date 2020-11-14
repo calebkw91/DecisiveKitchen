@@ -253,6 +253,8 @@ function recipeToDOM(response){
         measure: response.strMeasure20
     }]
 
+    $("#ingredients").empty();
+
     for(let i=0; i<ingredients.length; i++){
         if(ingredients[i].ingredient)
         {
